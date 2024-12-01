@@ -1,0 +1,27 @@
+#BlueJ class context
+comment0.target=Student
+comment0.text=\n\ Write\ a\ description\ of\ class\ Student\ here.\n\n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=LastName\ FirstName\ StudentID\ A1\ A2\ A3
+comment1.target=Student(java.lang.String,\ java.lang.String,\ double,\ double,\ double,\ double)
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Student\n
+comment10.params=A3
+comment10.target=boolean\ setass3(double)
+comment2.params=
+comment2.target=double\ getStudentID()
+comment2.text=\n\ methods\ to\ access\ the\ properties\n
+comment3.params=
+comment3.target=double\ getA1()
+comment4.params=
+comment4.target=double\ getA2()
+comment5.params=
+comment5.target=double\ getA3()
+comment6.params=LastName
+comment6.target=boolean\ setlastName(java.lang.String)
+comment6.text=\n\ methods\ to\ manpulate\ the\ properties\n
+comment7.params=FirstName
+comment7.target=boolean\ setfirstName(java.lang.String)
+comment8.params=A1
+comment8.target=boolean\ setass1(double)
+comment9.params=A2
+comment9.target=boolean\ setass2(double)
+numComments=11
