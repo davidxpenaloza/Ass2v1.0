@@ -5,7 +5,32 @@
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Student
+import java.io.*;
+import java.io.File; //Import the File class
+import java.io.FileNotFoundException; //Import this class to handle errors
+import java.util.Scanner; //Import the Scanner class to read text files
+
+public class Readfile{
+    public static void main(String[] args){
+    try{
+        File myObj = new File("prog5001_students_grade_2022");
+        Scanner myReader = new Scanner(myObj);
+        while (myReader.hasNextLine()){
+            String data = myReader.nextLine();
+            System.out.println(data);
+        }
+        myReader.close();
+       } catch (FileNotFoundException e){
+        System.out.println("An error ocurred.");
+        e.printStackTrace();
+        }
+        
+        }
+    
+    }
+
+
+class Student
 {
     // instance variables - replace the example below with your own
     private String LastName;
