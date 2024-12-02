@@ -10,24 +10,24 @@ import java.io.File; //Import the File class
 import java.io.FileNotFoundException; //Import this class to handle errors
 import java.util.Scanner; //Import the Scanner class to read text files
 
-public class Readfile{
-    public static void main(String[] args){
-    try{
-        File myObj = new File("prog5001_students_grade_2022");
-        Scanner myReader = new Scanner(myObj);
-        while (myReader.hasNextLine()){
-            String data = myReader.nextLine();
-            System.out.println(data);
-        }
-        myReader.close();
-       } catch (FileNotFoundException e){
-        System.out.println("An error ocurred.");
-        e.printStackTrace();
-        }
+//public class Readfile{
+    //public static void main(String[] args){
+    //try{
+       // File myObj = new File("prog5001_students_grade_2022");
+        // Scanner myReader = new Scanner(myObj);
+        //while (myReader.hasNextLine()){
+           // String data = myReader.nextLine();
+           // System.out.println(data);
+        //}
+        //myReader.close();
+       //} catch (FileNotFoundException e){
+       // System.out.println("An error ocurred.");
+        //e.printStackTrace();
+       // }
         
-        }
+       // }
     
-    }
+    //}
 
 
 class Student
@@ -35,7 +35,7 @@ class Student
     // instance variables - replace the example below with your own
     private String LastName;
     private String FirstName;
-    private double StudentID;
+    private String StudentID;
     private double A1;
     private double A2;
     private double A3;
@@ -43,7 +43,7 @@ class Student
     /**
      * Constructor for objects of class Student
      */
-    public Student(String LastName, String FirstName, double StudentID, double A1, double A2, double A3)
+    public Student(String LastName, String FirstName, String StudentID, double A1, double A2, double A3)
     {
         // initialise instance variables
         this.LastName = LastName;
@@ -57,7 +57,7 @@ class Student
     /**
      * methods to access the properties
      */
-    public double getStudentID()
+    public String getStudentID()
     {
         return StudentID;
     }
@@ -127,9 +127,44 @@ class Student
         return true;
     }
     
+    public double getTotalMark(){
+        return A1 + A2 + A3 ;
+    }
+    
+    @Override
+    public String toString(){
+        return "LastName: " + LastName + ", FirstName: " + LastName + ", StudentID" + StudentID + ", Marks: " + A1 + ", " + A2 + ", " + A3 + ", Total: " + getTotalMark();                             
+    
+    }
+    
+    }
+   
+public class StudentMarks {
+    
+    public static void main (String[] args){
+    try{
+        File myFile = new File ("prog5001_students_grade_2022.csv");
+        Scanner myScanner = new Scanner(myFile);
+        while(myScanner.hasNextLine()){
+            String line = myScanner.nextLine();
+            System.out.println(line);
+        }
+        myScanner.close();
+    
+    }
+    catch (FileNotFoundException e){
+        System.out.println("An error has ocurred. ");
+        e.printStackTrace();
+    
+    
+    }
+    }
+
+}
+   
     /**
      * method to export the Student data as a string
      */
     
-} 
+
 
