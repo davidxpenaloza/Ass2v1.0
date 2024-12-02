@@ -5,11 +5,11 @@
  * @author (your name)
  * @version (a version number or a date)
  */
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
-//import javafx.application.Preloader.StateChangeNotification;
+import java.io.*; //Imports classes for input/output
+import java.util.ArrayList; //Imports the ArrayList class for storing
+import java.util.Scanner; 
 
+//Stores of each variable
 class Student{
     private String lastName;
     private String firstName;
@@ -18,11 +18,13 @@ class Student{
     private float A2;
     private float A3;
 
+    //Method to calculate and return total marks
     public float getTotalMarks(){
            return A1 + A2 + A3;
     }
     
     public Student(String lastName, String firstname, String studentID, float A1, float A2, float A3){
+     //Assigns values to instance variables using "this"
      this.lastName = lastName;
      this.firstName = firstName;
      this.studentID = studentID;
@@ -31,6 +33,7 @@ class Student{
      this.A3 = A3;
     }
     @Override
+    //Method to format student inf into a string
     public String toString(){
         
         double totalMarks = getTotalMarks();        
@@ -44,23 +47,24 @@ public class StudentMarks {
     ArrayList<Student> students = new ArrayList<>();
     
     try{
-       File f = new File ("prog5001_students_grade_2022.txt");
-       Scanner sc = new Scanner(f);
+       File f = new File ("prog5001_students_grade_2022.txt"); //Creates a File object 
+       Scanner sc = new Scanner(f); // Creates a Scanner object to read the file
        
-       while (sc.hasNextLine()){
+       while (sc.hasNextLine()){ //Loop still until the end of the file
         String line = sc.nextLine();
         String[] parts = line.split(",");
-        
+        //Assigns values from the split line to variables
         String lastName = parts[0];
         String firstName = parts[1];
         String studentID = parts[2];
         
+        //Assigns values from the split line to variables
         try{
         float A1 = Float.parseFloat(parts[3]);
         float A2 = Float.parseFloat(parts[4]);
         float A3 = Float.parseFloat(parts[5]);
         
-        Student p = new Student(lastName, firstName, studentID, A1, A2, A3);
+        Student p = new Student(lastName, firstName, studentID, A1, A2, A3);//create a student object
         students.add(p);
         
          // Print for debugging
@@ -77,7 +81,7 @@ public class StudentMarks {
         students.sort((s1, s2) -> Float.compare(s2.getTotalMarks(), s1.getTotalMarks()));
 
         System.out.println("\nTop 5 Students with Highest Marks: ");
-        for (int i = 0; i < Math.min(students.size(), 5); i++) {
+        for (int i = 0; i < Math.min(students.size(), 5); i++) { //print top 5 students with highest marks
             System.out.println(students.get(i).toString());
         }
 
