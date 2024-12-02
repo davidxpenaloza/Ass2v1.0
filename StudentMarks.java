@@ -18,7 +18,6 @@ class Student {
     private float A1;
     private float A2;
     private float A3;
-   
 
     // /**
      // * Constructor for objects of class Student
@@ -134,8 +133,9 @@ class Student {
     
     @Override
     public String toString(){
+        double notaFinal =getNotaFinal();
         //float notaFinal = getNotaFinal();
-        return String.format("%s, %s, %s, %.2f, %.2f, %.2f", lastName, firstName, studentID, A1, A2, A3);                             
+        return String.format("%s, %s, %s, %.2f, %.2f, %.2f, %.2f", lastName, firstName, studentID, A1, A2, A3, notaFinal);                             
     
     }
 }
