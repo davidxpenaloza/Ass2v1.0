@@ -10,96 +10,101 @@ import java.io.File; //Import the File class
 import java.io.FileNotFoundException; //Import this class to handle errors
 import java.util.Scanner; //Import the Scanner class to read text files
 
-//public class Readfile{
-    //public static void main(String[] args){
-    //try{
-       // File myObj = new File("prog5001_students_grade_2022");
-        // Scanner myReader = new Scanner(myObj);
-        //while (myReader.hasNextLine()){
-           // String data = myReader.nextLine();
-           // System.out.println(data);
-        //}
-        //myReader.close();
-       //} catch (FileNotFoundException e){
-       // System.out.println("An error ocurred.");
-        //e.printStackTrace();
-       // }
-        
-       // }
-    
-    //}
-
-
-class Student
-{
+class Student {
     // instance variables - replace the example below with your own
-    private String LastName;
-    private String FirstName;
-    private String StudentID;
-    private double A1;
-    private double A2;
-    private double A3;
+    private String lastName;
+    private String firstName;
+    private String studentID;
+    private float A1;
+    private float A2;
+    private float A3;
+   
 
-    /**
-     * Constructor for objects of class Student
-     */
-    public Student(String LastName, String FirstName, String StudentID, double A1, double A2, double A3)
+    // /**
+     // * Constructor for objects of class Student
+     // */
+  public Student(String LastName, String FirstName, String StudentID, float A1, float A2, float A3)
     {
-        // initialise instance variables
-        this.LastName = LastName;
-        this.FirstName = FirstName;
-        this.StudentID = StudentID;
+       
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.studentID = studentID;
         this.A1 = A1;
         this.A2 = A2;
         this.A3 = A3;
+       
     }
+
+  public Student(){
+    }  
+    
+    public double getNotaFinal(){
+    return (A1 + A2 + A3) / 3.;
+    }
+    
+    public String getFirstName(){
+        return firstName;
+    }
+    
+    public String getLastName(){
+        return lastName;
+    }
+    
+    public String getStudentID(){
+        return studentID;
+    }
+    
 
     /**
      * methods to access the properties
      */
-    public String getStudentID()
-    {
-        return StudentID;
-    }
-    
-    public double getA1(){
+    public float getA1(){
         return A1;
     }
     
-    public double getA2(){
+    public float getA2(){
         return A2;
     }
 
-    public double getA3(){
+    public float getA3(){
         return A3;
     }
-
-    /**
-     * methods to manpulate the properties
-     */
-    public boolean setlastName(String LastName){
+     
     
-        if ((LastName.length() > 2) && (LastName.length() < 30)){
-            this.LastName = LastName;
+  public boolean setLastName(String lastName){
+    
+    if ((lastName.length() > 2) && (lastName.length() < 30)){
+             this.lastName = lastName;
         } else{
             return false;
         }
         return true;
     }
 
-    public boolean setfirstName(String FirstName){
+    public boolean setFirstName(String firstName){
     
-        if ((FirstName.length() > 2) && (FirstName.length() < 16)){
-            this.FirstName = FirstName;
+        if ((firstName.length() > 2) && (firstName.length() < 20)){
+            this.firstName = firstName;
         } else{
             return false;
         }
         return true;
     }
     
-    public boolean setass1(double A1){
+    public boolean setStudentID(String studentID){
     
-        if( A1>0 && A1<30){
+        if ((studentID.length() > 2) && (studentID.length() < 10)){
+            this.studentID = studentID;
+        } else{
+            return false;
+        }
+        return true;
+    }
+    
+    
+    public boolean seta1(float A1){
+    
+        if( (A1>0) && (A1<30)){
             this.A1 = A1;
         }else {
             return false;
@@ -107,9 +112,9 @@ class Student
         return true;
     }
     
-    public boolean setass2(double A2){
+    public boolean seta2(float A2){
     
-        if( A2>0 && A2<30){
+        if( (A2>0) && (A2<30)){
             this.A2 = A2;
         }else {
             return false;
@@ -117,9 +122,9 @@ class Student
         return true;
     }
     
-    public boolean setass3(double A3){
+    public boolean seta3(float A3){
     
-        if( A3>0 && A3<30){
+        if( (A3>0) && (A3<30)){
             this.A3 = A3;
         }else {
             return false;
@@ -127,44 +132,81 @@ class Student
         return true;
     }
     
-    public double getTotalMark(){
-        return A1 + A2 + A3 ;
-    }
-    
     @Override
     public String toString(){
-        return "LastName: " + LastName + ", FirstName: " + LastName + ", StudentID" + StudentID + ", Marks: " + A1 + ", " + A2 + ", " + A3 + ", Total: " + getTotalMark();                             
+        //float notaFinal = getNotaFinal();
+        return String.format("%s, %s, %s, %.2f, %.2f, %.2f", lastName, firstName, studentID, A1, A2, A3);                             
     
     }
-    
-    }
-   
-public class StudentMarks {
-    
-    public static void main (String[] args){
-    try{
-        File myFile = new File ("prog5001_students_grade_2022.csv");
-        Scanner myScanner = new Scanner(myFile);
-        while(myScanner.hasNextLine()){
-            String line = myScanner.nextLine();
-            System.out.println(line);
-        }
-        myScanner.close();
-    
-    }
-    catch (FileNotFoundException e){
-        System.out.println("An error has ocurred. ");
-        e.printStackTrace();
-    
-    
-    }
-    }
-
 }
+   // the main method
+    public class StudentMarks{
+   public static void main (String[] args){
+       
+       Scanner userInput = new Scanner(System.in);
+       System.out.print("Enter the minimun total mark threshold: ");
+       float threshold = userInput.nextFloat();
+       
+       
+       
+       try{
+           File f = new File ("prog5001_students_grade_2022.txt");
+           Scanner sc = new Scanner(f);
+           
+           int i=0;
+           while(sc.hasNextLine()){
+               String s = sc.nextLine();
+               String lastName = "";
+               String firstName = "";
+               String studentID = "";
+               if (i>0){
+               
+                String[] details = s.split(",");
+                lastName = details[0];
+                firstName = details[1];
+                studentID = details[2];
+                  
+                  float A1 = 0, A2 = 0, A3 = 0;
+                  try{
+                   A1 = Float.parseFloat(details[3]);
+                   for(int j=4; j<details.length; j++){
+                    //if(j==5){
+                        //A2= details.length >5 ? Float.parseFloat(details[5]) : 0.0f;
+                        A2 = Float.parseFloat(details[j].isEmpty() ? "0.0f": details[j]);
+                     if (j + 1 < details.length){
+                    
+                         A3 = Float.parseFloat(details[j+1].isEmpty()? "0.0f": details[j]);
+                        }
+                    }
+                    
+                    
+                }catch (NumberFormatException e){
+                     System.err.println("Error parsing grades for "+ lastName + "," + firstName + ":" + e.getMessage());    
+                    }
+                   Student p = new Student(lastName, firstName, studentID, A1, A2, A3);
+                   if(p.getNotaFinal()<threshold){
+                       System.out.println(p.toString());
+                    }
+                }
+
+                i++;
+            }
+    }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }
+       
+        userInput.close();
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
    
-    /**
-     * method to export the Student data as a string
-     */
-    
-
-
