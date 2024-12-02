@@ -41,7 +41,7 @@ class Student{
     
     }   
 }
-public class StudentMarks {
+public class StudentOrder {
     public static void main(String[] args){
     //Scanner userInput = new Scanner(System.in);
     ArrayList<Student> students = new ArrayList<>();
