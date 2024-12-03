@@ -10,6 +10,7 @@ import java.io.*;
 import java.io.File; //Import the File class
 import java.io.FileNotFoundException; //Import this class to handle errors
 import java.util.Scanner; //Import the Scanner class to read text files
+import java.util.ArrayList;
 
 //Define the Student class to encapsulate the details and academic performance of an individual student.
 class Student {
@@ -155,7 +156,7 @@ class Student {
        
     //Try-catch block to handle potential file not found exceptions
        
-       try{
+        try{
            //Establish a File object that corresponds to the student grade data file
            File f = new File ("prog5001_students_grade_2022.txt");
            Scanner sc = new Scanner(f); //create a scanner object to read from the file
@@ -164,22 +165,53 @@ class Student {
            while(sc.hasNextLine()){
                //Initialize variables to store student information
                String s = sc.nextLine();
-               String lastName = "";
-               String firstName = "";
-               String studentID = "";
+               // String lastName = "";
+               // String firstName = "";
+               // String studentID = "";
                //Process lines only after the header
-               if (i>0){
+               if (i == 0){
+                i++;
+                continue;
+              }
                
                 String[] details = s.split(",");
+                
+                if(details.length < 6){
+                    System.out.println("Malformed line: "+s);
+                    continue;
+                }
+                
+                
                 //Extract student information from the split details
-                lastName = details[0];
-                firstName = details[1];
-                studentID = details[2];
+                String lastName = details[0].trim();
+                firstName = details[1].trim();
+                studentID = details[2].trim();
                 // Initialize variables for the purpose of storing student grades.
-                  float A1 = 0, A2 = 0, A3 = 0;
+                  //float A1 = 0.0f , A2 = 0.0f , A3 = 0.0f;
+                float A1 = parseGrade(details[3].trim());
+                float A2 = parseGrade(details[4].trim());
+                float A3 = parseGrade(details[5].trim());
+                
+                float totalMarks = (A1+A2+A3)/3;
+                
+                if(totalMarks < threshold){
+                    System.out.println(firstName + " " + lastName + "(ID: " + studentID + ") has total marks: "+ totalMarks);
+                }
+                
+                i++;
+            }
+            sc.close();
+        } catch(FileNotFoundException e){
+            System.out.println("File not found");
+        
+        
+        }
+                
+                
+                
                   //Utilize a try-catch block to effectively manage any potential NumberFormatException that may occur during the parsing of grades.
                   try{
-                   A1 = Float.parseFloat(details[3]); //Parse the first grade (A1) from the details array
+                   A1 = Float.parseFloat(details[3]. isEmpty() ? "0.0f" : details [3]); //Parse the first grade (A1) from the details array
                    for(int j=4; j<details.length; j++){
                         A2 = Float.parseFloat(details[j].isEmpty() ? "0.0f": details[j]); // Parse the second grade (A2)
                      if (j + 1 < details.length){
@@ -188,7 +220,7 @@ class Student {
                         }
                     }
                     
-                    
+                    //System.out.println("Parsed values: " + A1 + ", " + A2 + ", " + A3);
                 }catch (NumberFormatException e){
                      System.err.println("Error parsing grades for "+ lastName + "," + firstName + ":" + e.getMessage());    
                     }
