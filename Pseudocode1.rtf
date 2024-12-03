@@ -1,0 +1,220 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2820
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sl368\sa213\partightenfactor0
+
+\f0\fs32 \cf2 \expnd0\expndtw0\kerning0
+BEGIN\
+\pard\pardeftab720\sl368\sa213\partightenfactor0
+
+\f1\b \cf2 // Import libraries
+\f0\b0 \
+IMPORT File, FileNotFoundException, Scanner, ArrayList FROM java.io\
+CLASS Student. // Define Student class\
+
+\f1\b // Declare private instance variables
+\f0\b0 \
+STRING lastName\
+STRING firstName\
+STRING studentID\
+FLOAT A1, A2, A3\
+
+\f1\b // Constructor to initialize Student object
+\f0\b0 \
+METHOD Student (lastName, firstName, studentID, A1, A2, A3)\
+SET this.lastName = lastName\
+SET this.firstName = firstName\
+SET this.studentID = studentID\
+SET this.A1 = A1\
+SET this.A2 = A2\
+SET this.A3 = A3\
+END METHOD\
+
+\f1\b // Empty constructor
+\f0\b0 \
+METHOD Student ( )\
+END METHOD\
+
+\f1\b // Method to calculate final grade (average of A1, A2, A3)
+\f0\b0 \
+METHOD getNotaFinal RETURNS DOUBLE\
+RETURN (A1 + A2 + A3) / 3\
+END METHOD\
+
+\f1\b // Accessor methods to retrieve student details
+\f0\b0 \
+METHOD getFirstName RETURNS STRING\
+\'a0RETURN firstName\
+END METHOD\
+\'a0\
+METHOD getLastName RETURNS STRING\
+\'a0\'a0\'a0\'a0\'a0\'a0 RETURN lastName\
+\'a0END METHOD\
+\'a0\
+METHOD getStudentID RETURNS STRING\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 RETURN studentID\
+END METHOD\
+\'a0\
+
+\f1\b Accessor methods to retrieve individual grades
+\f0\b0 \
+METHOD getA1 RETURNS FLOAT\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 RETURN A1\
+END METHOD\
+\'a0\
+METHOD getA2 RETURNS FLOAT\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 RETURN A2\
+END METHOD\
+\'a0\
+\'a0METHOD getA3 RETURNS FLOAT\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \'a0RETURN A3\
+\'a0END METHOD\
+\'a0\
+
+\f1\b // Define methods for setting student information with validation
+\f0\b0 \
+METHOD setLastName(lastName) RETURNS BOOLEAN\
+IF (lastName.length() > 2 AND lastName.length() < 30) THEN\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 SET this.lastName = lastName\
+\'a0\'a0\'a0\'a0\'a0\'a0 ELSE\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 RETURN FALSE // Invalid name length\
+\'a0\'a0\'a0\'a0\'a0\'a0 END IF\
+\'a0\'a0\'a0\'a0\'a0\'a0 RETURN TRUE\
+\'a0\'a0 END METHOD\
+\'a0\
+METHOD setFirstName(firstName) RETURNS BOOLEAN\
+IF (firstName.length() > 2 AND firstName.length() < 20) THEN\
+SET this.firstName = firstName\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 ELSE\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 RETURN FALSE // Invalid name length\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 END IF\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 RETURN TRUE\
+\'a0END METHOD\
+\'a0\'a0\'a0 \
+METHOD setStudentID(studentID) RETURNS BOOLEAN\
+IF (studentID.length() > 2 AND studentID.length() < 10) THEN\
+SET this.studentID = studentID\
+ELSE\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 RETURN FALSE // Invalid ID length\
+END IF\
+RETURN TRUE\
+END METHOD\
+\'a0\
+// Methods to set individual grades with validation for grade range\
+METHOD seta1(A1) RETURNS BOOLEAN\
+IF (A1 > 0 AND A1 < 30) THEN\
+SET this.A1 = A1\
+\'a0\'a0 ELSE\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 RETURN FALSE // Invalid grade\
+\'a0 END IF\
+\'a0\'a0\'a0\'a0\'a0\'a0 RETURN TRUE\
+END METHOD\
+\'a0\'a0\'a0 \
+METHOD seta2(A2) RETURNS BOOLEAN\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 IF (A2 > 0 AND A2 < 30) THEN\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 SET this.A2 = A2\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 ELSE\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 RETURN FALSE // Invalid grade\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 END IF\
+\'a0\'a0\'a0\'a0 RETURN TRUE\
+END METHOD\
+\'a0\'a0\'a0 \
+METHOD seta3(A3) RETURNS BOOLEAN\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 IF (A3 > 0 AND A3 < 30) THEN\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 SET this.A3 = A3\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 ELSE\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 RETURN FALSE // Invalid grade\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 END IF\
+\'a0\'a0\'a0\'a0\'a0\'a0 RETURN TRUE\
+END METHOD\
+\'a0\
+
+\f1\b // Override toString() method to format student information into a string
+\f0\b0 \
+METHOD toString() RETURNS STRING\
+\'a0DECLARE notaFinal AS DOUBLE\
+\'a0SET notaFinal = getNotaFinal() // Calculate final grade\
+\'a0RETURN FORMAT("%s, %s, %s, %.2f, %.2f, %.2f, %.2f", lastName, firstName,\
+studentID, A1, A2, A3, notaFinal)\
+END METHOD\
+
+\f1\b // StudentMarks class with a proper implementation of the parseGrade method. 
+\f0\b0 \
+Class StudentMarks\
+\'a0Function main (args: Array of String)\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Create Scanner userInput\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Print "Enter the minimum total mark threshold: "\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Read threshold from userInput\
+Try\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Create File object f with name "prog5001_students_grade_2022.txt"\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Create Scanner object sc for the File \
+Set i to 0\
+\'a0While sc has next line\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Read line s from sc\
+
+\f1\b // Skip the header line
+\f0\b0 \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 If i is 0 then\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Increment i\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Continue to next iteration\
+\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Split line s by comma into array details\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \
+
+\f1\b // Check if the details array has at least six elements
+\f0\b0 \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 If length of details is less than 6 then\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Print "Malformed line: " + s\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Continue to next iteration\
+\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Set lastName to trimmed details[0]\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Set firstName to trimmed details[1]\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Set studentID to trimmed details[2]\
+
+\f1\b // Retrieve grades and parse them
+\f0\b0 \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Set A1 to result of parseGrade(trimmed details[3])\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Set A2 to result of parseGrade(trimmed details[4])\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Set A3 to result of parseGrade(trimmed details[5])\
+\'a0\
+
+\f1\b // Calculate total marks
+\f0\b0 \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Set totalMarks to (A1 + A2 + A3) / 3\
+\'a0\
+
+\f1\b // Check if total marks are less than the threshold
+\f0\b0 \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \'a0If totalMarks is less than threshold then\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Print firstName + " " + lastName + " (ID: " + studentID + ") has total marks: " + totalMarks\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Increment i\
+End While\
+Close Scanner sc\
+Catch FileNotFoundException\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Print "File not found."\
+Finally\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Close Scanner userInput\
+End Try\
+End Function\
+\'a0\
+
+\f1\b \'a0// Method to parse grades from a string
+\f0\b0 \
+Private Function parseGrade(grade: String) returns float\
+\'a0\'a0 If grade is empty then\
+\'a0\'a0\'a0 Print "Missing grade, defaulting to 0.0"\
+\'a0\'a0\'a0 Return 0.0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Else\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Try\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Return parsed float from grade\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Catch NumberFormatException\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Print "Invalid grade format: " + grade + ", defaulting to 0.0"\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Return 0.0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 End Try\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 End If\
+\'a0\'a0\'a0 End Function\
+End Class\
+}

@@ -22,9 +22,9 @@ class Student {
     private float A2;
     private float A3;
 
-    // /**
-     // * Constructor to instantiate a Student object with the specified details.
-     // */
+    /**
+     * Constructor to instantiate a Student object with the specified details.
+     */
   public Student(String LastName, String FirstName, String StudentID, float A1, float A2, float A3)
     {
        
@@ -165,9 +165,6 @@ class Student {
            while(sc.hasNextLine()){
                //Initialize variables to store student information
                String s = sc.nextLine();
-               // String lastName = "";
-               // String firstName = "";
-               // String studentID = "";
                //Process lines only after the header
                if (i == 0){
                 i++;
@@ -184,8 +181,8 @@ class Student {
                 
                 //Extract student information from the split details
                 String lastName = details[0].trim();
-                firstName = details[1].trim();
-                studentID = details[2].trim();
+                String firstName = details[1].trim();
+                String studentID = details[2].trim();
                 // Initialize variables for the purpose of storing student grades.
                   //float A1 = 0.0f , A2 = 0.0f , A3 = 0.0f;
                 float A1 = parseGrade(details[3].trim());
@@ -203,47 +200,33 @@ class Student {
             sc.close();
         } catch(FileNotFoundException e){
             System.out.println("File not found");
-        
+        } finally{
+            userInput.close();
         
         }
-                
-                
-                
-                  //Utilize a try-catch block to effectively manage any potential NumberFormatException that may occur during the parsing of grades.
-                  try{
-                   A1 = Float.parseFloat(details[3]. isEmpty() ? "0.0f" : details [3]); //Parse the first grade (A1) from the details array
-                   for(int j=4; j<details.length; j++){
-                        A2 = Float.parseFloat(details[j].isEmpty() ? "0.0f": details[j]); // Parse the second grade (A2)
-                     if (j + 1 < details.length){
-                    
-                         A3 = Float.parseFloat(details[j+1].isEmpty()? "0.0f": details[j]); // Parse the third grade (A3)
-                        }
-                    }
-                    
-                    //System.out.println("Parsed values: " + A1 + ", " + A2 + ", " + A3);
-                }catch (NumberFormatException e){
-                     System.err.println("Error parsing grades for "+ lastName + "," + firstName + ":" + e.getMessage());    
-                    }
-                   Student p = new Student(lastName, firstName, studentID, A1, A2, A3);
-                   if(p.getNotaFinal()<threshold){
-                       System.out.println(p.toString());
-                    }
-                }
-
-                i++;
+    }
+     
+    private static float parseGrade(String grade){
+    if(grade.isEmpty()){
+        System.out.println("Missing grade, defaulting to 0.0");
+        return 0.0f;
         
-            }
-    }catch(FileNotFoundException e){
-            e.printStackTrace();
-        }
-       
-        userInput.close();
-  }
-}
+        }   
+     try{
+        return Float.parseFloat(grade);
+    } catch(NumberFormatException e){
+        System.out.println("Invalid grade format:"+ grade);
+        return 0.0f;
+    
+    }
+  } 
+} 
 
-
-
-
+    
+    
+    
+    
+    
 
 
 
