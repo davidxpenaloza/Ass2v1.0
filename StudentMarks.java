@@ -145,9 +145,9 @@ class Student {
     
     }
 }
-   // Defin the StudentMarks class containing the main method
+   // Define the StudentMarks class containing the main method
     public class StudentMarks{
-            
+    // Define the main method        
    public static void main (String[] args){
        //Scanner object utilized to obtain user input for the minimum threshold of total marks
        Scanner userInput = new Scanner(System.in);
@@ -162,60 +162,61 @@ class Student {
            Scanner sc = new Scanner(f); //create a scanner object to read from the file
            //counter cariable to keep track of lines processed (Excluding header)
            int i=0;
+           // Loop continues as long as there's another line in the line
            while(sc.hasNextLine()){
                //Initialize variables to store student information
                String s = sc.nextLine();
                //Process lines only after the header
                if (i == 0){
                 i++;
-                continue;
+                continue;// Move to the next iteration without processing this line
               }
                
-                String[] details = s.split(",");
+                String[] details = s.split(","); // Split the line into an array of strings using commas as delimiters
                 
-                if(details.length < 6){
-                    System.out.println("Malformed line: "+s);
+                if(details.length < 6){  // Check if the line has less than 6 elements
+                    System.out.println("Malformed line: "+s); // Print error
                     continue;
                 }
                 
                 
                 //Extract student information from the split details
-                String lastName = details[0].trim();
-                String firstName = details[1].trim();
-                String studentID = details[2].trim();
+                String lastName = details[0].trim();//Extract lastName, trim any whitespace
+                String firstName = details[1].trim();//Extract firstName, trim any whitespace
+                String studentID = details[2].trim();//Extract studentName, trim any whitespace
                 // Initialize variables for the purpose of storing student grades.
-                  //float A1 = 0.0f , A2 = 0.0f , A3 = 0.0f;
+
                 float A1 = parseGrade(details[3].trim());
                 float A2 = parseGrade(details[4].trim());
                 float A3 = parseGrade(details[5].trim());
                 
-                float totalMarks = (A1+A2+A3)/3;
+                float totalMarks = (A1+A2+A3)/3;  // Calculate the total marks by averaging grades
                 
-                if(totalMarks < threshold){
+                if(totalMarks < threshold){  // Check if total marks are below the threshold
                     System.out.println(firstName + " " + lastName + "(ID: " + studentID + ") has total marks: "+ totalMarks);
                 }
                 
                 i++;
             }
             sc.close();
-        } catch(FileNotFoundException e){
-            System.out.println("File not found");
-        } finally{
+        } catch(FileNotFoundException e){ // Catch a potential file not found exception
+            System.out.println("File not found"); //print error
+        } finally{ //Finally block executes regardless of exceptions
             userInput.close();
         
         }
     }
      
-    private static float parseGrade(String grade){
-    if(grade.isEmpty()){
-        System.out.println("Missing grade, defaulting to 0.0");
-        return 0.0f;
+    private static float parseGrade(String grade){ // Defines a private static method to parse grades
+    if(grade.isEmpty()){  // Check if the grade string is empty
+        System.out.println("Missing grade, defaulting to 0.0"); // Print a message for missing grades
+        return 0.0f; // Return 0.0 as a default value for missing grades
         
         }   
      try{
-        return Float.parseFloat(grade);
+        return Float.parseFloat(grade); // Attempt to parse the grade string as a float
     } catch(NumberFormatException e){
-        System.out.println("Invalid grade format:"+ grade);
+        System.out.println("Invalid grade format:"+ grade);//print error
         return 0.0f;
     
     }
