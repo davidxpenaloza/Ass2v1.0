@@ -47,9 +47,9 @@ class Student{
         return lastName + ", " + firstName + "(" + studentID + ") - Marks: " +marks+ " - Average: " + String.format("%.2f", average);
     }
     
-    }
+}
     
-public class StudentMarksAnalyzer{
+public class StudentOrder{
 
     public static void main(String[] args){
         String filename = "prog5001_students_grade_2022.txt";
@@ -69,7 +69,7 @@ public class StudentMarksAnalyzer{
         }
     }    
     
-    private static List<Stucent> readStudentData(String filename){
+    private static List<Student> readStudentData(String filename){
         List<Student> studentList = new ArrayList<>();
         
         try (BufferedReader br = new BufferedReader(new FileReader(filename))){
@@ -80,7 +80,7 @@ public class StudentMarksAnalyzer{
             while((line = br.readLine()) != null){
                 line = line.trim();
                 if(line.isEmpty() || line.startsWith("#")){
-                continue;
+                   continue;
                 }
                 
                 String[] parts = line.split(",");
@@ -90,27 +90,27 @@ public class StudentMarksAnalyzer{
             
                 String lastName = parts[0].trim();
                 String firstName = parts[1].trim();
-                String firstName = parts[2].trim();
+                String studentID = parts[2].trim();
                 List<Double> marks = new ArrayList<>();
                 
-                for(int i = 3; i < parts.lenght; i++){
+                for (int i = 3; i < parts.length; i++){
                     if(parts[i].trim().isEmpty()){
                         marks.add(0.0);
                     } else{
                         marks.add(Double.parseDouble(parts[i].trim()));
                     }
                 }
-                    studentList.add(new Student(lastName, firstname, studentID, marks));
+                
+                studentList.add(new Student(lastName, firstName, studentID, marks));
              }
-            studentList.add(new Student (lastName, firstName, studentID, marks));                
-        }
-    } catch (IOException e){
+          
+    } catch (IOException e) {
          System.err.println("Error reading the file: " + e.getMessage());
     }
         
     return studentList;
-    }
-        }
+  }
+}
 
 
 
