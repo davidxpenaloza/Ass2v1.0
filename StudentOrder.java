@@ -67,6 +67,14 @@ public class StudentOrder{
             System.out.println(students.get(students.size() -1 - i));
         
         }
+        
+        System.out.println("Five Students with Lowest Average Marks:");//Print the five students with hight marks
+        for(int i=0; i < Math.min(5, students.size()); i++){
+            System.out.println(students.get(i));
+        
+        }
+        
+        
     }    
     
     private static List<Student> readStudentData(String filename){
